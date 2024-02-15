@@ -2,20 +2,28 @@ import { useState } from "react";
 import "./App.css";
 import { Feedback } from "./components/Feedback/Feedback";
 import { Options } from "./components/Options/Options";
+import { Notification } from "./components/Notification/Notification";
 
 export function App() {
-  const [value, setValue] = useState({
+  const state = {
     good: 0,
     neutral: 0,
     bad: 0,
-  });
-  // feedbackType;
-  const updateFeedback = (type) => {
+  };
+
+  const [value, setValue] = useState(state);
+
+  const updateFeedback = (feedbackType) => {
     setValue({
       ...value,
-      [type]: value[type] + 1,
+      [feedbackType]: value[feedbackType] + 1,
     });
   };
+
+  // console.log(value);
+
+  const totalFeedback = value.good + value.neutral + value.bad;
+  // console.log(totalFeedback);
 
   return (
     <>
@@ -27,7 +35,13 @@ export function App() {
       <Options onUpdate={() => updateFeedback("good")}>Good</Options>
       <Options onUpdate={() => updateFeedback("neutral")}>Neutral</Options>
       <Options onUpdate={() => updateFeedback("bad")}>Bad</Options>
-      <Feedback value={value} />
+      <div>
+        {totalFeedback > 0 ? (
+          <Feedback value={value} totalFeedback={totalFeedback} />
+        ) : (
+          <Notification />
+        )}
+      </div>
     </>
   );
 }
