@@ -1,3 +1,9 @@
+import css from "./Notification.module.css";
+
 export const Notification = () => {
-  return <p>Not feedback eyt</p>;
+  return (
+    <div className={css.container}>
+      <p className={css.title}>Not feedback eyt</p>
+    </div>
+  );
 };
