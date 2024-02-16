@@ -1,8 +1,9 @@
 import { useState } from "react";
-import "./App.css";
 import { Feedback } from "./components/Feedback/Feedback";
 import { Options } from "./components/Options/Options";
 import { Notification } from "./components/Notification/Notification";
+
+import "./App.css";
 
 export function App() {
   const state = {
@@ -20,10 +21,15 @@ export function App() {
     });
   };
 
-  // console.log(value);
+  const resetFeedback = () => {
+    setValue({ state });
+  };
 
   const totalFeedback = value.good + value.neutral + value.bad;
-  // console.log(totalFeedback);
+
+  const positivFeedback =
+    Math.round(((value.good + value.neutral) / totalFeedback) * 100) || 0;
+  // console.log(positivFeedback);
 
   return (
     <>
@@ -32,12 +38,19 @@ export function App() {
         Please leave your feedback about our service by selecting one of the
         options below.
       </p>
-      <Options onUpdate={() => updateFeedback("good")}>Good</Options>
-      <Options onUpdate={() => updateFeedback("neutral")}>Neutral</Options>
-      <Options onUpdate={() => updateFeedback("bad")}>Bad</Options>
+      <Options
+        onUpdate={updateFeedback}
+        totalFeedback={totalFeedback}
+        reset={resetFeedback}
+      />
+
       <div>
         {totalFeedback > 0 ? (
-          <Feedback value={value} totalFeedback={totalFeedback} />
+          <Feedback
+            value={value}
+            totalFeedback={totalFeedback}
+            persentPositiv={positivFeedback}
+          />
         ) : (
           <Notification />
         )}

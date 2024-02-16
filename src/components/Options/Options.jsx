@@ -1,3 +1,10 @@
-export const Options = ({ onUpdate, children }) => {
-  return <button onClick={onUpdate}>{children}</button>;
+export const Options = ({ onUpdate, totalFeedback, reset }) => {
+  return (
+    <div>
+      <button onClick={() => onUpdate("good")}>Good</button>
+      <button onClick={() => onUpdate("neutral")}>Neutral</button>
+      <button onClick={() => onUpdate("bad")}>Bad</button>
+      {totalFeedback > 0 && <button onClick={reset}>Reset</button>}
+    </div>
+  );
 };
