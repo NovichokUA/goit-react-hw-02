@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn {
+    padding: 4px 6px;
+    color: wheat;
+    background-color: rgb(22, 73, 73);
+    border: none;
+    border-radius: 4px;
+    box-shadow: -0.5px 0 4px olive;
+}
+
+.btn:hover {
+    background-color: rgb(8, 24, 24)d;
+    transition: 0.4s;
+}
+
+.btn:focus {
+    outline-color: transparent;
+    outline-style: solid;
+    box-shadow: 0 0 0 1px rgb(92, 92, 0);
+    transition: 0.4s;
+}
+
+.btn:active {
+    background-color: #906e09;
+}
