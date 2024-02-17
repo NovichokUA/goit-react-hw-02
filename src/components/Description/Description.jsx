@@ -1,6 +1,6 @@
-import css from "./Title.module.css";
+import css from "./Description.module.css";
 
-export const Title = () => {
+export const Description = () => {
   return (
     <div className={css.container}>
       <h1 className={css.title}>Sip Happens Café</h1>

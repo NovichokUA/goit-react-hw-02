@@ -2,21 +2,19 @@ import { useState, useEffect } from "react";
 import { Feedback } from "./components/Feedback/Feedback";
 import { Options } from "./components/Options/Options";
 import { Notification } from "./components/Notification/Notification";
-import { Title } from "./components/Title/Title.jsx";
-
-const state = {
-  good: 0,
-  neutral: 0,
-  bad: 0,
-};
-
-const getSavedValue = () => {
-  const savedValue = window.localStorage.getItem("my-key");
-  return savedValue !== null ? JSON.parse(savedValue) : state;
-};
+import { Description } from "./components/Description/Description.jsx";
 
 export function App() {
-  const [value, setValue] = useState(getSavedValue);
+  const state = {
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  };
+
+  const [value, setValue] = useState(() => {
+    const savedValue = window.localStorage.getItem("my-key");
+    return savedValue !== null ? JSON.parse(savedValue) : state;
+  });
 
   const updateFeedback = (feedbackType) => {
     setValue({
@@ -40,7 +38,7 @@ export function App() {
 
   return (
     <>
-      <Title />
+      <Description />
       <Options
         onUpdate={updateFeedback}
         totalFeedback={totalFeedback}
@@ -52,7 +50,7 @@ export function App() {
           <Feedback
             value={value}
             totalFeedback={totalFeedback}
-            persentPositiv={positivFeedback}
+            percentPositive={positivFeedback}
           />
         ) : (
           <Notification />
